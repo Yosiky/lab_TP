@@ -48,7 +48,7 @@ public:
 			throw (std::runtime_error("queue is empty"));
 	}
 
-	void print(std::ostream &out) const {
+	void print(std::ostream &out, std::string sep=" ") const {
 		std::shared_ptr<List<value_type>> first = head;
 		bool first_elem = true;
 		while (first != nullptr) {
@@ -56,7 +56,7 @@ public:
 				out << *first->data;
 				first_elem = false;
 			} else 
-				out << ' ' << *first->data;
+				out << sep << *first->data;
 
 			first = first->next;
 		}
@@ -93,7 +93,6 @@ int main(void) {
 	}
 	queue.print(std::cout);
 	std::cout << std::endl;
-	// queue.pop_front();
 
 	Queue<SpaceShip> ships_order;
 
@@ -102,8 +101,8 @@ int main(void) {
 		for (int i = 0; i < rand() % 5 + 5; ++i) 
 			pointer->arr.push_back(new int(i));
 		ships_order.push_back(pointer);
-		std::cout << *pointer << std::endl;
 	}
-
+	std::cout << "Ships order: " << std::endl;
+	ships_order.print(std::cout, "\n");
 	return (0);
 }
